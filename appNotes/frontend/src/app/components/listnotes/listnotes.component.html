@@ -1,0 +1,32 @@
+
+<h1>Note List</h1>
+<button class="btn btn-info"><a routerLink="/create/note"> Create Note</a></button>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Body</th>
+        <th scope="col">Author</th>
+        <th scope="col">Date</th>
+        <th scope="col">Image</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let note of notes">
+        <td>{{ note.title }}</td>
+        <td>{{ note.body }}</td>
+        <td>{{ note.author }}</td>
+        <td>{{ note.date }}</td>
+        <td>
+          <div >
+            <img src="{{note.image}}">
+          </div>
+        </td>
+        <td><button class="btn btn-success" routerLink="/edit/note/{{note.id}}">Edit</button> | <button class="btn btn-danger" (click)="deleteNote(note.id)" style="border:white 5px-solid;" >Delete</button> </td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <button class="btn btn-info" (click)="recharge()" >Refresh</button>

@@ -1,0 +1,25 @@
+<div>
+    <h1>Edit Note</h1>
+    <form *ngIf="noteForm" [formGroup]="noteForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="title" class="form-label">Note Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Enter a Note Title" formControlName="title">
+          </div>
+          <div class="mb-3">
+            <label for="body" class="form-label">Note Body</label>
+            <textarea class="form-control" id="body" rows="3" formControlName="body"></textarea>
+          </div> 
+          <div class="mb-3">
+            <label for="author" class="form-label">Note Author</label>
+            <input type="email" class="form-control" id="author" formControlName="author">
+          </div>
+          <div class="mb-3">
+            <label for="date" class="form-label">Note Date</label>
+            <input type="date" class="form-control" id="date" formControlName="date">
+          </div>     
+          <div class="mb-3">
+            <button type="submit"  class="btn btn-primary">Update Note</button>
+          </div>  
+    </form>
+    <button  class="btn btn-primary"  routerLink="/listNotes">Cancel</button>
+</div>
