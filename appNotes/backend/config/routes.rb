@@ -8,5 +8,13 @@ Rails.application.routes.draw do
       root "notes#index"
       resources :notes, only:[:index, :show, :create, :update, :destroy]
     end
+    namespace :v2 do
+      root "users#index"
+      resources :users, only:[:index, :show, :create, :update, :destroy]
+    end
+    namespace :v3 do
+      root "notesusers#index"
+      resources :notesusers, only:[:index, :show, :create, :update, :destroy]
+    end
   end
 end

@@ -10,13 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_26_153603) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_17_094225) do
+  create_table "note_users", force: :cascade do |t|
+    t.string "noteid"
+    t.string "useremail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "notes", force: :cascade do |t|
     t.string "title"
     t.text "body"
     t.string "author"
     t.string "date"
     t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "surname"
+    t.string "email"
+    t.string "password"
+    t.string "rol"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
