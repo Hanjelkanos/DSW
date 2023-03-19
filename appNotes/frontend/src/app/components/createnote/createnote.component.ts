@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./createnote.component.scss']
 })
 export class CreatenoteComponent {
+  imgCharged = ""
 
   note:any;
 
@@ -28,7 +29,7 @@ export class CreatenoteComponent {
 
   
   onSubmit(){
-
+    let email = "" + this.noteForm.get('author')?.value
     if(this.noteForm.get('title')?.value == ""){
       Swal.fire('Hey user!', 'Empty Title field', 'error');
     }
@@ -37,13 +38,15 @@ export class CreatenoteComponent {
     }
     else if(this.noteForm.get('author')?.value == ""){
       Swal.fire('Hey user!', 'Empty Author field', 'error');
+      
+    }
+    else if(!this.emailValidator(email)){
+      Swal.fire('Hey user!', 'Invalid email format', 'error');
     }
     else if(this.noteForm.get('date')?.value == ""){
       Swal.fire('Hey user!', 'Empty Date field', 'error');
     }
     else{
-      let path = this.noteForm.get('image')?.value
-      let newpath = "" + path?.replace("fakepath", "appNotes\\frontend\\images")
       let title = "" + this.noteForm.get('title')?.value
       let body = "" + this.noteForm.get('body')?.value
       let author = "" + this.noteForm.get('author')?.value
@@ -54,7 +57,7 @@ export class CreatenoteComponent {
         body: new FormControl(body),
         author: new FormControl(author),
         date: new FormControl(date),
-        image: new FormControl(newpath)
+        image: new FormControl(this.imgCharged)
       });
       
       this.noteService.addNote(noteForm2.value).subscribe(
@@ -72,6 +75,20 @@ export class CreatenoteComponent {
     
   }
 
-  
+onFileChanged(e: { base64: string; }[]){
+  this.imgCharged = e[0].base64;
+
+}
+
+emailValidator(email:string) : boolean{
+  var emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if(emailPattern.test(email)){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
 
 }

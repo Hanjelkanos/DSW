@@ -5,11 +5,11 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-editnote',
-  templateUrl: './editnote.component.html',
-  styleUrls: ['./editnote.component.scss']
+  selector: 'app-edit-notes-admin',
+  templateUrl: './edit-notes-admin.component.html',
+  styleUrls: ['./edit-notes-admin.component.scss']
 })
-export class EditnoteComponent {
+export class EditNotesAdminComponent {
   imgCharged = ""
   noteForm! : FormGroup;
   note:any;
@@ -74,7 +74,7 @@ export class EditnoteComponent {
         }
   
       )
-      this.router.navigate(['/listNotes'])
+      this.router.navigate(['/listNotesAdmin'])
       Swal.fire('Success', 'Note updated successfully', 'success');
     }
     

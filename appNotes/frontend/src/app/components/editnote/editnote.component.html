@@ -11,11 +11,15 @@
           </div> 
           <div class="mb-3">
             <label for="author" class="form-label">Note Author</label>
-            <input type="email" class="form-control" id="author" formControlName="author">
+            <input type="email" class="form-control" id="author" formControlName="author" readonly>
           </div>
           <div class="mb-3">
             <label for="date" class="form-label">Note Date</label>
-            <input type="date" class="form-control" id="date" formControlName="date">
+            <input type="date" class="form-control" id="date" formControlName="date" readonly >
+          </div> 
+          <div class="mb-3">
+            <label for="image" class="form-label">Note Image</label>
+            <input type="file" alife-file-to-base64 (onFileChanged)="onFileChanged($event)" class="form-control" id="image" formControlName="image">
           </div>     
           <div class="mb-3">
             <button type="submit"  class="btn btn-primary">Update Note</button>

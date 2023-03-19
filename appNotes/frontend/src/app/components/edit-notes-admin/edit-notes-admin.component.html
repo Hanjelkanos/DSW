@@ -1,6 +1,6 @@
 <div>
-    <h1>Create Note</h1>
-    <form [formGroup]="noteForm" (ngSubmit)="onSubmit()">
+    <h1>Edit Note</h1>
+    <form *ngIf="noteForm" [formGroup]="noteForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
             <label for="title" class="form-label">Note Title</label>
             <input type="text" class="form-control" id="title" placeholder="Enter a Note Title" formControlName="title">
@@ -11,21 +11,19 @@
           </div> 
           <div class="mb-3">
             <label for="author" class="form-label">Note Author</label>
-            <input type="email" class="form-control" id="author" formControlName="author" >
+            <input type="email" class="form-control" id="author" formControlName="author" readonly>
           </div>
           <div class="mb-3">
             <label for="date" class="form-label">Note Date</label>
-            <input type="date" class="form-control" id="date" formControlName="date">
-          </div>  
+            <input type="date" class="form-control" id="date" formControlName="date" readonly >
+          </div> 
           <div class="mb-3">
             <label for="image" class="form-label">Note Image</label>
             <input type="file" alife-file-to-base64 (onFileChanged)="onFileChanged($event)" class="form-control" id="image" formControlName="image">
-          </div>  
- 
+          </div>     
           <div class="mb-3">
-            <button type="submit"  class="btn btn-primary">Create new Note</button>
+            <button type="submit"  class="btn btn-primary">Update Note</button>
           </div>  
-          
     </form>
-    <button  class="btn btn-primary"  routerLink="/listNotes">Cancel</button>
+    <button  class="btn btn-primary"  routerLink="/listNotesAdmin">Cancel</button>
 </div>

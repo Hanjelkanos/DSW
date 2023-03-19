@@ -8,13 +8,22 @@ import { AppComponent } from './app.component';
 import { ListnotesComponent } from './components/listnotes/listnotes.component';
 import { CreatenoteComponent } from './components/createnote/createnote.component';
 import { EditnoteComponent } from './components/editnote/editnote.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { AlifeFileToBase64Module } from 'alife-file-to-base64';
+import { ListNotesAdminComponent } from './components/list-notes-admin/list-notes-admin.component';
+import { EditNotesAdminComponent } from './components/edit-notes-admin/edit-notes-admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListnotesComponent,
     CreatenoteComponent,
-    EditnoteComponent
+    EditnoteComponent,
+    LoginComponent,
+    SignupComponent,
+    ListNotesAdminComponent,
+    EditNotesAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -22,6 +31,7 @@ import { EditnoteComponent } from './components/editnote/editnote.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    AlifeFileToBase64Module
 
   ],
   providers: [],

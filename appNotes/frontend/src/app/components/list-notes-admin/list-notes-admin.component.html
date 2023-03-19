@@ -1,6 +1,5 @@
-
 <h1>Note List</h1>
-<h1>{{userEmail}}</h1>
+<h1>{{userEmail}} (ADMIN MODE)</h1>
 <button class="btn btn-danger"><a routerLink="/login"> Log out</a></button>
 <button class="btn btn-info"><a routerLink="/create/note"> Create Note</a></button>
 
@@ -26,19 +25,10 @@
             <img src="{{note.image}}">
           </div>
         </td>
-        <td><button class="btn btn-success" routerLink="/edit/note/{{note.id}}">Edit</button> | <button class="btn btn-danger" (click)="deleteNote(note.id)" style="border:white 5px-solid;" >Delete</button> | <button class="btn btn-info" (click)="share(note.id)" style="border:white 5px-solid;" >Share</button> </td>
+        <td><button class="btn btn-success" routerLink="/editAdmin/note/{{note.id}}">Edit</button> | <button class="btn btn-danger" (click)="deleteNote(note.id)" style="border:white 5px-solid;" >Delete</button> </td>
       </tr>
       
     </tbody>
   </table>
-  <form  *ngIf="shareForm" [formGroup]="shareForm">
-    <div class="mb-3">
-        <label for="useremail" class="form-label">Share with:</label>
-        <select  type="email" class="form-control" id="useremail" placeholder="Enter an user email" formControlName="useremail">
-          <option   value={{user.email}} *ngFor="let user of users" > {{ user.email }}  </option>
-        </select>
-          
-    </div>
-  </form>
   <hr>
   <button class="btn btn-info" (click)="recharge()" >Refresh</button>

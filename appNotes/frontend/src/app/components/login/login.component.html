@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Slide Navbar</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="main">  	
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="signup">
+				<form [formGroup]="signupForm" (ngSubmit)="signup()">
+					<label for="chk" aria-hidden="true">Sign up</label>
+					<input type="text" class="form-control" name="name" id="name" placeholder="User name" formControlName="name">
+					<input type="text" class="form-control" name="surname" id="surname" placeholder="User surname" formControlName="surname">
+					<input type="email" class="form-control" name="email" id="email" placeholder="Email" formControlName="email">
+					<input type="password" class="form-control" name="password" id="password"  placeholder="Password" formControlName="password">
+					<button >Sign up</button>
+				</form>
+			</div>
+
+			<div class="login">
+				<form [formGroup]="loginForm" (ngSubmit)="login()">
+					<label for="chk" aria-hidden="true">Login</label>
+					<input type="email" class="form-control" name="email" id="email" placeholder="Email" formControlName="email">
+					<input type="password" class="form-control" name="password" id="password" placeholder="Password" formControlName="password">
+					<button type="submit"  style=" border-color: white; color: white ;background-color:#e8882a; ">Login</button>
+				</form>
+			</div>
+	</div>
+</body>
+</html>
