@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_17_094225) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_05_091419) do
+  create_table "friendrequests", force: :cascade do |t|
+    t.string "sourceuseremail"
+    t.string "targetuseremail"
+    t.string "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.string "useremail1"
+    t.string "useremail2"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "note_users", force: :cascade do |t|
     t.string "noteid"
     t.string "useremail"
@@ -24,6 +39,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_094225) do
     t.string "author"
     t.string "date"
     t.string "image"
+    t.string "collection"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
