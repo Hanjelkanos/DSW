@@ -1,0 +1,36 @@
+<h1>Friends Requests</h1>
+<h1>{{userEmail}}</h1>
+<button class="btn btn-info"><a routerLink="/friendships/{{userEmail}}"   style="border:rgb(0, 0, 0) 5px-solid;"> Back</a></button>
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Friend request from</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let request of requestsList">
+        <td>{{ request.sourceuseremail }}</td>
+        <td>{{ request.date }}</td>
+        <button class="btn btn-success" (click)="accept(request.id, request.sourceuseremail)" style="border:white 5px-solid;">Accept</button> |  <button class="btn btn-danger" (click)="deny(request.id)" style="border:white 5px-solid;" >Deny</button>
+      </tr>
+      
+    </tbody>
+</table>
+    <hr>
+    <form  *ngIf="sendrequestForm" [formGroup]="sendrequestForm">
+        <div class="mb-3">
+            <label for="useremail" class="form-label">Send friend request:</label>
+            <select  type="email" class="form-control" id="useremail" placeholder="Enter an user email" formControlName="useremail">
+              <option   value={{user.email}} *ngFor="let user of otherusers" > {{ user.email }}  </option>
+            </select>
+              
+        </div>
+    </form>
+
+
+      <button  class="btn btn-info" (click)="sendrequest()" style="border:white 5px-solid;" >Send request</button>
+  <hr>
+  <button class="btn btn-info" (click)="recharge()" >Refresh</button>

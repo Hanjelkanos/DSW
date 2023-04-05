@@ -20,7 +20,11 @@
           <div class="mb-3">
             <label for="image" class="form-label">Note Image</label>
             <input type="file" alife-file-to-base64 (onFileChanged)="onFileChanged($event)" class="form-control" id="image" formControlName="image">
-          </div>     
+          </div> 
+          <div class="mb-3">
+            <label for="collection" class="form-label">Note Collection</label>
+            <input type="text" class="form-control" id="collection" placeholder="Enter a Note Collection" formControlName="collection">
+          </div>    
           <div class="mb-3">
             <button type="submit"  class="btn btn-primary">Update Note</button>
           </div>  

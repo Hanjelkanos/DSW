@@ -1,9 +1,17 @@
-<h1>Note List</h1>
-<h1>{{userEmail}} (ADMIN MODE)</h1>
+<h1>Note Collections</h1>
 <button class="btn btn-danger"><a routerLink="/adminMenu"> Back</a></button>
-<button class="btn btn-info"><a routerLink="/create/note"> Create Note</a></button>
 
-<table class="table">
+<form  *ngIf="collectionForm" [formGroup]="collectionForm">
+    <div class="mb-3">
+        <label for="collection" class="form-label">Collection</label>
+        <select  (click)="NoteListCollection()" type="text" class="form-control" id="collection" formControlName="collection">
+          <option value="{{collection}}" *ngFor="let collection of collections" > {{ collection }}  </option>
+        </select>
+          
+    </div>
+  </form>
+
+  <table class="table">
     <thead>
       <tr>
         <th scope="col">Title</th>
@@ -12,11 +20,10 @@
         <th scope="col">Date</th>
         <th scope="col">Image</th>
         <th scope="col">Collection</th>
-        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let note of notes">
+      <tr *ngFor="let note of notesCollection">
         <td>{{ note.title }}</td>
         <td>{{ note.body }}</td>
         <td>{{ note.author }}</td>
@@ -27,10 +34,7 @@
           </div>
         </td>
         <td>{{ note.collection }}</td>
-        <td><button class="btn btn-success" routerLink="/editAdmin/note/{{note.id}}">Edit</button> | <button class="btn btn-danger" (click)="deleteNote(note.id)" style="border:white 5px-solid;" >Delete</button> </td>
       </tr>
       
     </tbody>
   </table>
-  <hr>
-  <button class="btn btn-info" (click)="recharge()" >Refresh</button>

@@ -10,10 +10,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-
   user:any; 
   users:any[] = []
   useremail:string = ""
+  emailexist = false
 
   signupForm = new FormGroup({
     name: new FormControl(''),
@@ -27,6 +27,10 @@ export class LoginComponent {
     email: new FormControl(''),
     password: new FormControl('')
   });
+
+  ngOnInit(){
+    this.ListUsers()
+  }
 
   constructor(private userService:UsersService, private router:Router){
 
@@ -54,16 +58,33 @@ export class LoginComponent {
       Swal.fire('Hey user!', 'Password has to have at least 8 characters', 'error');
     }
     else{
-      console.log(this.signupForm.value)
-      this.userService.addUser(this.signupForm.value).subscribe(
-        user => {
-          this.user = user
-          Swal.fire('Success', 'User created successfully', 'success');
-          this.signupForm.reset()
-        },error => {
-          Swal.fire('Hey user!', 'Error creating user', 'error');
+      for(let i=0; i<this.users.length;i++){
+        if(email == this.users[i].email){
+          this.emailexist = true
+          console.log("existe")
+
         }
-      )
+      }
+      
+
+      if(this.emailexist){
+        Swal.fire('Error', 'This email is already registered', 'error');
+      }
+      else{
+        Swal.fire('Success', 'User created successfully', 'success');
+        this.userService.addUser(this.signupForm.value).subscribe(
+          user => {
+            this.user = user
+            this.ListUsers()
+            this.signupForm.reset()
+            window.location.reload();
+
+          },error => {
+            Swal.fire('Hey user!', 'Error creating user', 'error');
+          }
+        )
+      }
+      
     }
   }
 
@@ -85,7 +106,7 @@ export class LoginComponent {
               
               if(this.users[i].rol == "admin"){
                 Swal.fire('Success', 'You have successfully logged in as admin', 'success');
-                this.router.navigate(['/listNotesAdmin/' + this.users[i].email])
+                this.router.navigate(['/adminMenu'])
               }
               else if(this.users[i].rol == "user"){
                 Swal.fire('Success', 'You have successfully logged in as user', 'success');
@@ -111,6 +132,14 @@ export class LoginComponent {
     else{
       return false;
     }
+  }
+
+  ListUsers(){
+    this.userService.listUser().subscribe(
+      users => {
+        this.users = Object.values(users)
+      }
+    )
   }
 
 
