@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotesService } from 'src/app/services/notes.service';
 import Swal from 'sweetalert2';
 
@@ -14,17 +14,25 @@ export class CreatenoteComponent {
   imgCharged = ""
 
   note:any;
+  userEmail:any
+  noteForm! : FormGroup;
 
-  noteForm =  new FormGroup({
-    title: new FormControl(''),
-    body: new FormControl(''),
-    author: new FormControl(''),
-    date: new FormControl(''),
-    image: new FormControl('')
-  });
+  
 
-  constructor(private noteService:NotesService, private router:Router){
+  constructor(private noteService:NotesService, private router:Router, private route: ActivatedRoute){
 
+  }
+  ngOnInit(){
+    const routeParams = this.route.snapshot.paramMap;
+    this.userEmail = routeParams.get('useremail');
+    this.noteForm =  new FormGroup({
+      title: new FormControl(''),
+      body: new FormControl(''),
+      author: new FormControl(this.userEmail),
+      date: new FormControl(''),
+      image: new FormControl(''),
+      collection: new FormControl('')
+    });
   }
 
   
@@ -51,19 +59,21 @@ export class CreatenoteComponent {
       let body = "" + this.noteForm.get('body')?.value
       let author = "" + this.noteForm.get('author')?.value
       let date = "" + this.noteForm.get('date')?.value
+      let collection = "" + this.noteForm.get('collection')?.value
 
        let noteForm2 =  new FormGroup({
         title: new FormControl(title),
         body: new FormControl(body),
         author: new FormControl(author),
         date: new FormControl(date),
-        image: new FormControl(this.imgCharged)
+        image: new FormControl(this.imgCharged),
+        collection: new FormControl(collection)
       });
       
       this.noteService.addNote(noteForm2.value).subscribe(
         note => {
           this.note = note
-            this.router.navigate(['/listNotes'])
+            this.router.navigate(['/listNotes/' + this.userEmail])
             Swal.fire('Success', 'Note created successfully', 'success');
         }, error => {
           Swal.fire('Hey user!', 'Error adding note', 'error');

@@ -1,0 +1,25 @@
+<div>
+    <h1>Edit User</h1>
+    <form *ngIf="userForm" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="name" class="form-label">User Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter User Name" formControlName="name">
+          </div>
+          <div class="mb-3">
+            <label for="surname" class="form-label">User Surname</label>
+            <input type="text" class="form-control" id="surname" placeholder="Enter User Surname" formControlName="surname">
+          </div> 
+          <div class="mb-3">
+            <label for="email" class="form-label">User Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email" >
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">User Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password"  >
+          </div>     
+          <div class="mb-3">
+            <button type="submit"  class="btn btn-primary">Update User</button>
+          </div>  
+    </form>
+    <button  class="btn btn-primary"  routerLink="/listUsers">Cancel</button>
+</div>

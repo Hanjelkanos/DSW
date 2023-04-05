@@ -14,14 +14,17 @@ export class EditnoteComponent {
   noteForm! : FormGroup;
   note:any;
   id:any
+  userEmail:any
 
   constructor(private noteService: NotesService, private route: ActivatedRoute, private router:Router){
 
   }
   ngOnInit(){
     const routeParams = this.route.snapshot.paramMap;
+    this.userEmail = routeParams.get('useremail');
     this.id = Number(routeParams.get('noteID'));
     console.log(this.id);
+    console.log(this.userEmail)
     this.noteService.findNote(this.id).subscribe(
       note => {
         this.note = note
@@ -31,7 +34,8 @@ export class EditnoteComponent {
           body: new FormControl(this.note.body),
           author: new FormControl(this.note.author),
           date: new FormControl(this.note.date),
-          image: new FormControl(this.note.image)
+          image: new FormControl(this.note.image),
+          collection: new FormControl(this.note.collection)
         });
 
       }
@@ -58,23 +62,26 @@ export class EditnoteComponent {
       let body = "" + this.noteForm.get('body')?.value
       let author = "" + this.noteForm.get('author')?.value
       let date = "" + this.noteForm.get('date')?.value
+      let collection = "" + this.noteForm.get('collection')?.value
 
        let noteForm2 =  new FormGroup({
         title: new FormControl(title),
         body: new FormControl(body),
         author: new FormControl(author),
         date: new FormControl(date),
-        image: new FormControl(this.imgCharged)
+        image: new FormControl(this.imgCharged),
+        collection: new FormControl(collection)
       });
 
-      this.noteService.updateNote(this.noteForm.value, this.id).subscribe(
+      this.noteService.updateNote(noteForm2.value, this.id).subscribe(
         note =>{
+          console.log(noteForm2.value)
           console.log("Note Updated Succesfully");
           
         }
   
       )
-      this.router.navigate(['/listNotes'])
+      this.router.navigate(['/listNotes/' + this.userEmail]) 
       Swal.fire('Success', 'Note updated successfully', 'success');
     }
     

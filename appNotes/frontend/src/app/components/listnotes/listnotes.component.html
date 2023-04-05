@@ -1,8 +1,10 @@
 
 <h1>Note List</h1>
 <h1>{{userEmail}}</h1>
-<button class="btn btn-danger"><a routerLink="/login"> Log out</a></button>
-<button class="btn btn-info"><a routerLink="/create/note"> Create Note</a></button>
+<button class="btn btn-danger"><a routerLink="/login" style="border:rgb(0, 0, 0) 5px-solid;"> Log out</a></button>
+<button class="btn btn-info"><a routerLink="/create/note/{{userEmail}}" style="border:rgb(0, 0, 0) 5px-solid;"> Create Note</a></button>
+<button class="btn btn-info"><a routerLink="/noteCollections/{{userEmail}}" style="border:rgb(0, 0, 0) 5px-solid;"> Collections</a></button>
+<button class="btn btn-info"><a routerLink="/friendships/{{userEmail}}" style="border:rgb(0, 0, 0) 5px-solid;"> Friendships</a></button>
 
 <table class="table">
     <thead>
@@ -12,11 +14,12 @@
         <th scope="col">Author</th>
         <th scope="col">Date</th>
         <th scope="col">Image</th>
+        <th scope="col">Collection</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let note of notes">
+      <tr *ngFor="let note of notesFilter">
         <td>{{ note.title }}</td>
         <td>{{ note.body }}</td>
         <td>{{ note.author }}</td>
@@ -26,7 +29,8 @@
             <img src="{{note.image}}">
           </div>
         </td>
-        <td><button class="btn btn-success" routerLink="/edit/note/{{note.id}}">Edit</button> | <button class="btn btn-danger" (click)="deleteNote(note.id)" style="border:white 5px-solid;" >Delete</button> | <button class="btn btn-info" (click)="share(note.id)" style="border:white 5px-solid;" >Share</button> </td>
+        <td>{{ note.collection }}</td>
+        <td><button class="btn btn-success" routerLink="/edit/note/{{note.id}}/{{userEmail}}">Edit</button> |  <button *ngIf = "note.author == userEmail" class="btn btn-danger" (click)="deleteNote(note.id)" style="border:white 5px-solid;" >Delete</button> | <button *ngIf = "note.author == userEmail"  class="btn btn-info" (click)="share(note.id)" style="border:white 5px-solid;" >Share</button> </td>
       </tr>
       
     </tbody>
@@ -35,7 +39,7 @@
     <div class="mb-3">
         <label for="useremail" class="form-label">Share with:</label>
         <select  type="email" class="form-control" id="useremail" placeholder="Enter an user email" formControlName="useremail">
-          <option   value={{user.email}} *ngFor="let user of users" > {{ user.email }}  </option>
+          <option   value={{user.email}} *ngFor="let user of otherusers" > {{ user.email }}  </option>
         </select>
           
     </div>

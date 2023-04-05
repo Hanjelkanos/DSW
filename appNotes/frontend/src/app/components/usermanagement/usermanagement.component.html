@@ -1,0 +1,25 @@
+<h1>User List</h1>
+<button class="btn btn-danger"><a routerLink="/adminMenu"> Back</a></button>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Email</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.name }}</td>
+        <td>{{ user.surname }}</td>
+        <td>{{ user.email }}</td>
+        <td><button class="btn btn-success" routerLink="/edit/user/{{user.id}}">Edit</button> | <button class="btn btn-danger" (click)="deleteUser(user.id)" style="border:white 5px-solid;" >Delete</button> </td>
+      </tr>
+      
+    </tbody>
+  </table>
+  
+  <hr>
+  <button class="btn btn-info" (click)="recharge()" >Refresh</button>
