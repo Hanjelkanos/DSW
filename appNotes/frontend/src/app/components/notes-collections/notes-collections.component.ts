@@ -7,19 +7,24 @@ import { NotesusersService } from 'src/app/services/notesusers.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-listnotes',
-  templateUrl: './listnotes.component.html',
-  styleUrls: ['./listnotes.component.scss']
+  selector: 'app-notes-collections',
+  templateUrl: './notes-collections.component.html',
+  styleUrls: ['./notes-collections.component.scss']
 })
-export class ListnotesComponent {
+export class NotesCollectionsComponent {
   userEmail:any;
-  notesList: any[] = []
+  notes:any
+  notesList:any[] = []
+  notesCollection:any[] = []
+  users:any
+  collections:any[] = []
   notesusersList:any[] = []
   notesFilter:any[] = []
-  notes:any
   usersList:any[] = []
   otherusers:any[] = []
-  shareForm! : FormGroup;
+  collectionForm =  new FormGroup({
+    collection: new FormControl('Select collection')
+  });
   constructor(private noteService: NotesService, private userService: UsersService, private NoteuserService: NotesusersService , private router:Router, private route: ActivatedRoute){
 
   }
@@ -27,11 +32,16 @@ export class ListnotesComponent {
   ngOnInit(){
     const routeParams = this.route.snapshot.paramMap;
     this.userEmail = routeParams.get('useremail');
-    console.log("El user email es:" + this.userEmail)
-    this.UserList()
+    this.NoteList()
+    this.CollectionList()
+    this.NoteListCollection()
     this.filterNotesUser()
-    this.shareForm =  new FormGroup({
-      useremail: new FormControl('')
+    console.log(this.collections)
+    /*this.NoteUsersList*/
+    this.UserList()
+    /*this.selectUserNotes()*/
+    this.collectionForm =  new FormGroup({
+      collection: new FormControl('Select collection')
     });
   }
 
@@ -64,8 +74,6 @@ export class ListnotesComponent {
     
   }
 
-  
-
   NoteList(){
     this.notes = this.noteService.listNote().subscribe(
       note => {
@@ -74,69 +82,45 @@ export class ListnotesComponent {
       }
     )
   }
-  
-
-  UserList(){
-    this.userService.listUser().subscribe(
-      users => {
-        this.usersList = Object.values(users)
-        for(let i=0; i<this.usersList.length;i++){
-          if(this.usersList[i].email != this.userEmail){
-            this.otherusers.push(this.usersList[i])
-          }
+  CollectionList(){
+    this.noteService.listNote().subscribe(
+      notes => {
+        this.notesList = Object.values(notes);
+        for(let i=0;i<this.notesList.length;i++){
+          this.collections.push(this.notesList[i].collection) 
         }
+        let collectionsArr = new Set(this.collections)
+        let collectionsNoRep = [...collectionsArr];
+        this.collections = collectionsNoRep;
       }
     )
   }
-  deleteNote(id:any){
-    this.noteService.deleteNote(id).subscribe(note => {
-      
-    });
-    for(let i=0; i<this.notesusersList.length;i++){
-      console.log(this.notesusersList[i].noteid + "---" + id )
-      if(this.notesusersList[i].noteid == id){
-        this.NoteuserService.deleteNoteUser(this.notesusersList[i].id).subscribe(noteuser => {
+  
 
-        })
+  UserList(){
+    this.users = this.userService.listUser().subscribe(
+      user => {
+        this.users = user
+      }
+    )
+  }
+
+  NoteListCollection(){
+    this.notesCollection = []
+    console.log(this.notesFilter)
+    console.log(this.userEmail)
+    for(let i=0;i<this.notesFilter.length;i++){
+      if(this.notesFilter[i].collection == this.collectionForm.value.collection){
+        this.notesCollection.push(this.notesFilter[i])
       }
     }
-    
-    
-    Swal.fire('Success', 'Note deleted successfully', 'info');
-    window.location.reload();
-    window.location.reload();
-    window.location.reload();
   }
-
-  recharge(){
-    window.location.reload();
-
-  }
-
-  share(noteId:string){
-    let useremail = "" + this.shareForm.get('useremail')?.value
-    let noteuserform =  new FormGroup({
-      noteid: new FormControl(noteId),
-      useremail: new FormControl(useremail)
-    });
-
-    if(useremail == ""){
-      Swal.fire('Hey user!', 'You have to select a user', 'error');
-    }
-    else{
-      this.NoteuserService.addNoteUser(noteuserform.value).subscribe(
-        noteuser => {
-            Swal.fire('Success', 'Note shared with' + useremail, 'success');
   
-        }, error => {
-          Swal.fire('Hey user!', 'Error sharing note', 'error');
-        }
-  
-      )
-    }
-    
 
-  }
+
+
+
+  
   
 
 }

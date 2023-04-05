@@ -1,0 +1,25 @@
+<h1>Friends</h1>
+<h1>{{userEmail}}</h1>
+<button class="btn btn-info"><a routerLink="/listNotes/{{userEmail}}"> Back</a></button>
+<button class="btn btn-info"><a routerLink="/friendrequests/{{userEmail}}"> Friend Requests</a></button>
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let friend of friends">
+        <td>{{ friend.name }}</td>
+        <td>{{ friend.surname }}</td>
+        <td>{{ friend.email }}</td>
+        <td><button class="btn btn-danger" (click)="deleteFriendship(friend.email)" style="border:white 5px-solid;" >Delete</button> </td>
+      </tr>
+      
+    </tbody>
+  <hr>
+  <button class="btn btn-info" (click)="recharge()" >Refresh</button>

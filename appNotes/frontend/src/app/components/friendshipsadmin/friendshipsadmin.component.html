@@ -1,0 +1,22 @@
+<h1>Friendships List</h1>
+<button class="btn btn-danger"><a routerLink="/adminMenu"> Back</a></button>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">User email 1</th>
+        <th scope="col">User email 2</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let friendship of friendships">
+        <td>{{ friendship.useremail1 }}</td>
+        <td>{{ friendship.useremail2 }}</td>
+        <td><button class="btn btn-danger" (click)="deleteFriendship(friendship.id)" style="border:white 5px-solid;" >Delete</button> </td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <hr>
+  <button class="btn btn-info" (click)="recharge()" >Refresh</button>
