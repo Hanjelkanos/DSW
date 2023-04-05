@@ -13,6 +13,14 @@ import { SignupComponent } from './components/signup/signup.component';
 import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 import { ListNotesAdminComponent } from './components/list-notes-admin/list-notes-admin.component';
 import { EditNotesAdminComponent } from './components/edit-notes-admin/edit-notes-admin.component';
+import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
+import { UsermanagementComponent } from './components/usermanagement/usermanagement.component';
+import { EdituserComponent } from './components/edituser/edituser.component';
+import { NotesCollectionsComponent } from './components/notes-collections/notes-collections.component';
+import { FriendshipsComponent } from './components/friendships/friendships.component';
+import { FriendrequestsComponent } from './components/friendrequests/friendrequests.component';
+import { FriendshipsadminComponent } from './components/friendshipsadmin/friendshipsadmin.component';
+import { CollectionsadminComponent } from './components/collectionsadmin/collectionsadmin.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +31,15 @@ import { EditNotesAdminComponent } from './components/edit-notes-admin/edit-note
     LoginComponent,
     SignupComponent,
     ListNotesAdminComponent,
-    EditNotesAdminComponent
+    EditNotesAdminComponent,
+    AdminMenuComponent,
+    UsermanagementComponent,
+    EdituserComponent,
+    NotesCollectionsComponent,
+    FriendshipsComponent,
+    FriendrequestsComponent,
+    FriendshipsadminComponent,
+    CollectionsadminComponent
   ],
   imports: [
     BrowserModule,
