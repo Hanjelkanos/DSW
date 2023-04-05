@@ -16,5 +16,13 @@ Rails.application.routes.draw do
       root "notesusers#index"
       resources :notesusers, only:[:index, :show, :create, :update, :destroy]
     end
+    namespace :v4 do
+      root "friendships#index"
+      resources :friendships, only:[:index, :show, :create, :update, :destroy]
+    end
+    namespace :v5 do
+      root "friendrequests#index"
+      resources :friendrequests, only:[:index, :show, :create, :update, :destroy]
+    end
   end
 end

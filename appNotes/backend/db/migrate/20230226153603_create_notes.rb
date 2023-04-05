@@ -6,6 +6,7 @@ class CreateNotes < ActiveRecord::Migration[7.0]
       t.string :author
       t.string :date
       t.string :image
+      t.string :collection
 
       t.timestamps
     end

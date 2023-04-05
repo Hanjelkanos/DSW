@@ -9,7 +9,7 @@ class Api::V1::NotesController < ApplicationController
   end
 
   def create
-    note = Note.new(title: note_params[:title], body: note_params[:body], author: note_params[:author], date:note_params[:date], image:note_params[:image])
+    note = Note.new(title: note_params[:title], body: note_params[:body], author: note_params[:author], date:note_params[:date], image:note_params[:image], collection:note_params[:collection])
     if note.save
       render json:note, status: 200
     else
@@ -30,7 +30,7 @@ class Api::V1::NotesController < ApplicationController
     note = Note.find(params[:id])
 
     if note
-      note.update(title: params[:title], body: params[:body], author: params[:author], date:params[:date], image:params[:image])
+      note.update(title: params[:title], body: params[:body], author: params[:author], date:params[:date], image:params[:image], collection:params[:collection])
       render json: "Note updated successfully"
     else
       render json:{ error: "Note not found"}
@@ -49,6 +49,6 @@ class Api::V1::NotesController < ApplicationController
 
   private
     def note_params
-      params.require(:note).permit(:title, :body, :author, :date, :image)
+      params.require(:note).permit(:title, :body, :author, :date, :image, :collection)
     end
 end
