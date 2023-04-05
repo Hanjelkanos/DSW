@@ -4,6 +4,11 @@ import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2';
 
+
+
+
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -70,9 +75,24 @@ export class LoginComponent {
       if(this.emailexist){
         Swal.fire('Error', 'This email is already registered', 'error');
       }
-      else{
+      else{ 
+        let name = "" + this.signupForm.get('name')?.value
+        let surname = "" + this.signupForm.get('surname')?.value
+        let email = "" + this.signupForm.get('email')?.value
+        let password = "" + this.signupForm.get('password')?.value
+        let passwordEncrypted = btoa(password)
+  
+        let signupForm2 =  new FormGroup({
+        name: new FormControl(name),
+        surname: new FormControl(surname),
+        email: new FormControl(email),
+        password: new FormControl(passwordEncrypted),
+        rol: new FormControl("user")
+        });
+
+
         Swal.fire('Success', 'User created successfully', 'success');
-        this.userService.addUser(this.signupForm.value).subscribe(
+        this.userService.addUser(signupForm2.value).subscribe(
           user => {
             this.user = user
             this.ListUsers()
@@ -101,7 +121,7 @@ export class LoginComponent {
         users => {
           this.users = Object.values(users);
           for(let i=0;i<this.users.length;i++){
-            if(this.users[i].email == this.loginForm.get('email')?.value && this.users[i].password == this.loginForm.get('password')?.value){
+            if(this.users[i].email == this.loginForm.get('email')?.value && atob(this.users[i].password) == this.loginForm.get('password')?.value){
               loginCorrecto = true;
               
               if(this.users[i].rol == "admin"){
