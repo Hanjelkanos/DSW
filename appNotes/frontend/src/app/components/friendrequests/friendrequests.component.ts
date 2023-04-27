@@ -91,6 +91,8 @@ export class FriendrequestsComponent {
     Swal.fire('Success', 'Now you are friends with ' + sourceuseremailString, 'success');
     this.RequestList()
     this.RequestList()
+
+    
     this.recharge()
     
   }

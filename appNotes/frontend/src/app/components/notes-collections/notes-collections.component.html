@@ -1,5 +1,17 @@
 <h1>Note Collections</h1>
-<button class="btn btn-danger"><a routerLink="/listNotes/{{userEmail}}"> Back</a></button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" >Options</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#" routerLink="/listNotes/{{userEmail}}">Back</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
 
 <form  *ngIf="collectionForm" [formGroup]="collectionForm">
     <div class="mb-3">
