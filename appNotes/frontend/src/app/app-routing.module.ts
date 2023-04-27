@@ -15,17 +15,21 @@ import { FriendshipsComponent } from './components/friendships/friendships.compo
 import { FriendrequestsComponent } from './components/friendrequests/friendrequests.component';
 import { FriendshipsadminComponent } from './components/friendshipsadmin/friendshipsadmin.component';
 import { CollectionsadminComponent } from './components/collectionsadmin/collectionsadmin.component';
+import { CreateNoteAdminComponent } from './components/create-note-admin/create-note-admin.component';
+import { UserInformationComponent } from './components/user-information/user-information.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent},
   { path: 'listNotes', component: ListnotesComponent},
   { path: 'listUsers', component: UsermanagementComponent},
+  { path: 'userInformation/:useremail', component: UserInformationComponent},
   { path: 'noteCollections', component: NotesCollectionsComponent},
   { path: 'noteCollectionsadmin', component: CollectionsadminComponent},
   { path: 'noteCollections/:useremail', component: NotesCollectionsComponent},
   { path: 'adminMenu', component: AdminMenuComponent},
   { path: 'listNotesAdmin', component: ListNotesAdminComponent},
   { path: 'create/note', component: CreatenoteComponent},
+  { path: 'create/noteAdmin', component: CreateNoteAdminComponent},
   { path: 'create/note/:useremail', component: CreatenoteComponent},
   { path: 'edit/note/:noteID', component: EditnoteComponent},
   { path: 'edit/user/:userID', component: EdituserComponent},
