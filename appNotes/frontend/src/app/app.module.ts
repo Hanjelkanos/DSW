@@ -21,6 +21,8 @@ import { FriendshipsComponent } from './components/friendships/friendships.compo
 import { FriendrequestsComponent } from './components/friendrequests/friendrequests.component';
 import { FriendshipsadminComponent } from './components/friendshipsadmin/friendshipsadmin.component';
 import { CollectionsadminComponent } from './components/collectionsadmin/collectionsadmin.component';
+import { CreateNoteAdminComponent } from './components/create-note-admin/create-note-admin.component';
+import { UserInformationComponent } from './components/user-information/user-information.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { CollectionsadminComponent } from './components/collectionsadmin/collect
     FriendshipsComponent,
     FriendrequestsComponent,
     FriendshipsadminComponent,
-    CollectionsadminComponent
+    CollectionsadminComponent,
+    CreateNoteAdminComponent,
+    UserInformationComponent
   ],
   imports: [
     BrowserModule,
