@@ -105,10 +105,12 @@ GEM
       timeout
     net-smtp (0.3.3)
       net-protocol
-    nio4r (2.5.8)
+    nio4r (2.7.3)
     nokogiri (1.14.2-x64-mingw-ucrt)
       racc (~> 1.4)
-    puma (5.6.5)
+    nokogiri (1.14.2-x86_64-linux)
+      racc (~> 1.4)
+    puma (5.6.9)
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.6.2)
@@ -146,6 +148,7 @@ GEM
     reline (0.3.2)
       io-console (~> 0.5)
     sqlite3 (1.6.1-x64-mingw-ucrt)
+    sqlite3 (1.6.1-x86_64-linux)
     thor (1.2.1)
     timeout (0.3.2)
     tzinfo (2.0.6)
@@ -159,11 +162,12 @@ GEM
 
 PLATFORMS
   x64-mingw-ucrt
+  x86_64-linux
 
 DEPENDENCIES
   bootsnap
   debug
-  puma (~> 5.0)
+  puma (~> 5.6, >= 5.6.9)
   rack-cors
   rails (~> 7.0.4, >= 7.0.4.2)
   sqlite3 (~> 1.4)
